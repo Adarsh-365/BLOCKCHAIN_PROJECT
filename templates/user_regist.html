@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Land Records - User Registration</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_reg_style.css' %}">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{% static "images/LOGO.png" %}" alt="E-Land Records Logo">
+            <h2>Land Record Management</h2>
+            <h3>User Registration Page</h3>
+        </div>
+
+        <form id="registrationForm" onsubmit="return validateForm(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="username" class="required">User Name</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="required">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="required">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <span id="passwordMatchError" class="error">Passwords do not match</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName" class="required">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" id="middleName" name="middleName">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="required">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="required">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for "dob" class="required">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber" class="required">Phone Number</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="aadharNumber" class="required">Aadhaar Number</label>
+                    <input type="text" id="aadharNumber" name="aadharNumber" required>
+                </div>
+
+                <div class="form-group address-group">
+                    <label for="residentialAddress" class="required">Residential Address</label>
+                    <div>
+                        <label for="street">Street</label>
+                        <input type="text" id="street" name="street" required>
+                        
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                        
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                        
+                        <label for="zipCode">Zip Code</label>
+                        <input type="text" id="zipCode" name="zipCode" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="generate-btn" onclick="generateOTP()">Generate OTP</button>
+                <input type="text" id="otpInput" placeholder="Enter OTP" required>
+                <button type="button" class="confirm-btn" onclick="confirmOTP()">Confirm OTP</button>
+                <button type="submit" class="proceed-btn">Proceed</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let generatedOTP = '';
+
+        function generateOTP() {
+            generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+            alert(`Your OTP is: ${generatedOTP}`);
+            document.getElementById('otpInput').value = '';
+        }
+
+        function confirmOTP() {
+            const userOTP = document.getElementById('otpInput').value;
+            if (userOTP === generatedOTP) {
+                alert('OTP verified successfully!');
+            } else {
+                alert('Invalid OTP. Please try again.');
+            }
+        }
+
+        function validateForm(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const passwordMatchError = document.getElementById('passwordMatchError');
+
+            if (password !== confirmPassword) {
+                passwordMatchError.style.display = 'block';
+                return false;
+            } else {
+                passwordMatchError.style.display = 'none';
+            }
+
+            // Basic validation for required fields
+            const requiredFields = ['username', 'firstName', 'lastName', 'gender', 'dob', 
+                                 'phoneNumber', 'aadharNumber', 'street', 'city', 'state', 'zipCode'];
+            
+            for (let field of requiredFields) {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    alert(`Please fill in the ${input.previousElementSibling.textContent.trim()} field`);
+                    return false;
+                }
+            }
+
+            // Validate phone number (simple check for 10 digits)
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            if (!/^\d{10}$/.test(phoneNumber)) {
+                alert('Please enter a valid 10-digit phone number');
+                return false;
+            }
+
+            // Validate Aadhaar number (12 digits)
+            const aadharNumber = document.getElementById('aadharNumber').value;
+            if (!/^\d{12}$/.test(aadharNumber)) {
+                alert('Please enter a valid 12-digit Aadhaar number');
+                return false;
+            }
+
+            alert('Registration successful!');
+            return true;
+        }
+    </script>
+</body>
+</html>
