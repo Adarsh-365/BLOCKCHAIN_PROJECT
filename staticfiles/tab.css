@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Remove default body margin to eliminate gaps */
+    padding: 0;
+    display: flex; /* Use flexbox to layout sidebar and content side by side */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 60px; /* Fixed width for the sidebar */
+    background: #007bff; /* Blue background matching your image */
+    position: fixed; /* Stick to the left of the viewport */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    z-index: 1000; /* Ensure sidebar stays on top */
+}
+
+.sidebar-icon {
+    width: 30px; /* Icon size */
+    height: 30px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white; /* White icon color for contrast against blue background */
+}
+
+.sidebar-icon:hover {
+    color: #ddd; /* Lighter color on hover for visual feedback */
+}
+
+.sidebar-icon.active {
+    color: #fff; /* Highlight active icon */
+}
+
+/* Badge for Email Icon (e.g., showing "2") */
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Notebook (Tabs and Content) Styles */
+.notebook {
+    margin-left: 60px; /* Offset for the sidebar width */
+    width: calc(100% - 60px); /* Full width minus sidebar */
+}
+
+.tab-buttons {
+    display: flex;
+    position: fixed; /* Stick to the top of the viewport */
+    top: 0;
+    left: 60px; /* Start after the sidebar */
+    width: calc(100% - 60px); /* Span the full width minus sidebar */
+    border-bottom: 1px solid #ccc;
+    background: #f1f1f1; /* Background for the tab bar */
+    z-index: 1000; /* Ensure tabs stay on top of content */
+    overflow-x: auto; /* Allows horizontal scrolling if tabs overflow */
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s;
+    white-space: nowrap; /* Prevents text from wrapping */
+    min-width: 100px; /* Ensures tabs have a minimum width */
+    flex: 1; /* Distributes tabs evenly across the width */
+}
+
+.tab-btn:hover {
+    background: #ddd;
+}
+
+.tab-btn.active {
+    background: #007bff; /* Blue background for active tab, matching the image */
+    color: white;
+    border-bottom: 2px solid #0056b3;
+}
+
+.tab-content {
+
+    padding: 60px 20px 20px; /* Add padding at the top to account for fixed tab bar */
+    border: 1px solid #ccc;
+    border-top: none;
+   
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}

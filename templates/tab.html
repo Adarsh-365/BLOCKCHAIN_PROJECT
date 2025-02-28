@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="{% static 'tab.css' %}">
     <link rel="stylesheet" href="{% static 'tab2.css' %}">
     <link rel="stylesheet" href="{% static 'tab31.css' %}">
+    <link rel="stylesheet" href="{% static 'tab41.css' %}">
+    <link rel="stylesheet" href="{% static 'tab6.css' %}">
+    
     <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'tab4.css' %}">
 
 
 
@@ -41,10 +45,10 @@
             <button class="tab-btn" hx-get="{% url 'load_tab' 4 %}" hx-target="#tab-content" hx-swap="innerHTML">Inbox</button>
             <button class="tab-btn" hx-get="{% url 'load_tab' 5 %}" hx-target="#tab-content" hx-swap="innerHTML">Sent</button>
             <button class="tab-btn" hx-get="{% url 'load_tab' 6 %}" hx-target="#tab-content" hx-swap="innerHTML">Advance Search</button>
-            <button class="tab-btn" hx-get="{% url 'load_tab' 7 %}" hx-target="#tab-content" hx-swap="innerHTML">FILE</button>
-            <button class="tab-btn" hx-get="{% url 'load_tab' 8 %}" hx-target="#tab-content" hx-swap="innerHTML">ISSUE</button>
-            <button class="tab-btn" hx-get="{% url 'load_tab' 9 %}" hx-target="#tab-content" hx-swap="innerHTML">Returned</button>
-            <button class="tab-btn" hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML">Advance Search</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 4 %}" hx-target="#tab-content" hx-swap="innerHTML">FILE</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 4 %}" hx-target="#tab-content" hx-swap="innerHTML">ISSUE</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 4 %}" hx-target="#tab-content" hx-swap="innerHTML">Returned</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 6 %}" hx-target="#tab-content" hx-swap="innerHTML">Advance Search</button>
         </div>
 
         <div id="tab-content">
@@ -69,6 +73,9 @@
                 icon.classList.add('active');
             });
         });
+        window.onload = function() {
+            document.querySelector('.tab-btn.active').click();
+        };
     </script>
 </body>
 </html>

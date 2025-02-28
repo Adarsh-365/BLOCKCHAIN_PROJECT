@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    font-size: 12px;
+}
+.acknowledge-container {
+    display: flex;
+    height: 100vh;
+}
+.acknowledge-navbar {
+    background-color: #444;
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #666;
+}
+.acknowledge-nav-buttons {
+    display: flex;
+    gap: 5px;
+}
+.acknowledge-nav-btn {
+    background-color: #666;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.acknowledge-nav-btn:hover {
+    background-color: #555;
+}
+.acknowledge-header-text {
+    font-size: 12px;
+    color: #ff00ff;
+}
+.acknowledge-letter-section {
+    width: 50%;
+    background-color: white;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+}
+.acknowledge-form-section {
+    width: 50%;
+    padding: 10px;
+    background-color: white;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+}
+.acknowledge-form-columns {
+    display: flex;
+    gap: 10px;
+}
+.acknowledge-column {
+    width: 50%;
+}
+.acknowledge-form-group {
+    margin-bottom: 8px;
+}
+.acknowledge-label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+.acknowledge-input {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 12px;
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+.acknowledge-header {
+    background-color: #007bff;
+    color: white;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+.acknowledge-button {
+    background-color: #ff8c00;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 100%;
+}
+.acknowledge-button:hover {
+    background-color: #e67e00;
+}
+.acknowledge-footer {
+    text-align: center;
+    padding: 5px;
+    font-size: 10px;
+    color: #666;
+}
+.acknowledge-letter {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    height: 100%;
+    overflow: auto;
+}

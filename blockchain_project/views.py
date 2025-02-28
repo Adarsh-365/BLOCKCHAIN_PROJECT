@@ -16,12 +16,12 @@ def main(request):
    
     
 def tab(request):
-    print("does it clalling1")
+    # print("does it clalling1")
     return render(request,'tab.html')
 
 def dashboard(request):
     return render(request,'dashboard.html')
 
 def load_tab(request, tab):
-    print("does it clalling")
+    # print("does it clalling")
     return render(request, f'tabs/tab{tab}.html')

@@ -1,4 +1,140 @@
-<section class="tab3-sec">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Request Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-size: 12px;
+        }
+        .land-request-container {
+            display: flex;
+            height: 100vh;
+        }
+        .land-request-doc-viewer {
+            width: 40%;
+            background-color: white;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+        .land-request-upload-section {
+            margin-bottom: 10px;
+        }
+        .land-request-upload-btn {
+            background-color: #ff8c00;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .land-request-upload-btn:hover {
+            background-color: #e67e00;
+        }
+        .land-request-remove-btn {
+            background-color: #ccc;
+            color: black;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .land-request-remove-btn:hover {
+            background-color: #999;
+        }
+        .land-request-pdf-info {
+            color: #ff0000;
+            font-size: 10px;
+            margin-left: 10px;
+        }
+        .land-request-pdf-display {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed #ccc;
+            margin-top: 10px;
+            overflow: auto;
+        }
+        .land-request-form-section {
+            width: 60%;
+            padding: 10px;
+            background-color: white;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .land-request-form-columns {
+            display: flex;
+            gap: 10px;
+        }
+        .land-request-column {
+            width: 50%;
+        }
+        .land-request-form-group {
+            margin-bottom: 8px;
+        }
+        .land-request-label {
+            display: block;
+            margin-bottom: 3px;
+            font-weight: bold;
+        }
+        input[type="text"].land-request-input,
+        input[type="email"].land-request-input,
+        input[type="number"].land-request-input,
+        input[type="date"].land-request-input,
+        input[type="file"].land-request-input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        .land-request-radio-group {
+            margin-bottom: 6px;
+        }
+        .land-request-checkbox {
+            margin-top: 6px;
+        }
+        .land-request-button {
+            background-color: #ff8c00;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            width: 100%;
+        }
+        .land-request-button:hover {
+            background-color: #e67e00;
+        }
+        .land-request-footer {
+            text-align: center;
+            padding: 5px;
+            font-size: 10px;
+            color: #666;
+        }
+        h2.land-request-heading, h3.land-request-heading {
+            font-size: 14px;
+            margin-top: 8px;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
     <div class="land-request-container">
         <div class="land-request-doc-viewer">
             <div class="land-request-upload-section">
@@ -106,7 +242,7 @@
     </footer>
 
     <script>
-        let pdf_Url = null;
+        let pdfUrl = null;
 
         document.getElementById('land-request-pdf-upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -124,9 +260,9 @@
                     return;
                 }
                 // Create a URL for the PDF and display it in an iframe
-                pdf_Url = URL.createObjectURL(file);
+                pdfUrl = URL.createObjectURL(file);
                 const pdfDisplay = document.getElementById('land-request-pdf-display');
-                pdfDisplay.innerHTML = `<iframe src="${pdf_Url}" width="100%" height="100%" style="border: none;"></iframe>`;
+                pdfDisplay.innerHTML = `<iframe src="${pdfUrl}" width="100%" height="100%" style="border: none;"></iframe>`;
             }
         });
 
@@ -134,10 +270,11 @@
             const pdfDisplay = document.getElementById('land-request-pdf-display');
             pdfDisplay.innerHTML = '<p>Document Viewer (Placeholder for uploaded document)</p>';
             document.getElementById('land-request-pdf-upload').value = '';
-            if (pdf_Url) {
-                URL.revokeObjectURL(pdf_Url); // Clean up the object URL
-                pdf_Url = null;
+            if (pdfUrl) {
+                URL.revokeObjectURL(pdfUrl); // Clean up the object URL
+                pdfUrl = null;
             }
         }
     </script>
-</section>
+</body>
+</html>
