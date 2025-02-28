@@ -4,217 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabbed Notebook with Sidebar and Font Awesome Icons</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Font Awesome CDN -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0; /* Remove default body margin to eliminate gaps */
-            padding: 0;
-            display: flex; /* Use flexbox to layout sidebar and content side by side */
-        }
 
-        /* Sidebar Styles */
-        .sidebar {
-            width: 60px; /* Fixed width for the sidebar */
-            background: #007bff; /* Blue background matching your image */
-            position: fixed; /* Stick to the left of the viewport */
-            top: 0;
-            left: 0;
-            height: 100vh; /* Full viewport height */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 10px;
-            z-index: 1000; /* Ensure sidebar stays on top */
-        }
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tab.css' %}">
+    <link rel="stylesheet" href="{% static 'tab2.css' %}">
+    <link rel="stylesheet" href="{% static 'tab31.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
-        .sidebar-icon {
-            width: 30px; /* Icon size */
-            height: 30px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: white; /* White icon color for contrast against blue background */
-        }
 
-        .sidebar-icon:hover {
-            color: #ddd; /* Lighter color on hover for visual feedback */
-        }
 
-        .sidebar-icon.active {
-            color: #fff; /* Highlight active icon */
-        }
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-        /* Badge for Email Icon (e.g., showing "2") */
-        .badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: red;
-            color: white;
-            font-size: 10px;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Notebook (Tabs and Content) Styles */
-        .notebook {
-            margin-left: 60px; /* Offset for the sidebar width */
-            width: calc(100% - 60px); /* Full width minus sidebar */
-        }
-
-        .tab-buttons {
-            display: flex;
-            position: fixed; /* Stick to the top of the viewport */
-            top: 0;
-            left: 60px; /* Start after the sidebar */
-            width: calc(100% - 60px); /* Span the full width minus sidebar */
-            border-bottom: 1px solid #ccc;
-            background: #f1f1f1; /* Background for the tab bar */
-            z-index: 1000; /* Ensure tabs stay on top of content */
-            overflow-x: auto; /* Allows horizontal scrolling if tabs overflow */
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background: #f1f1f1;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: background 0.3s;
-            white-space: nowrap; /* Prevents text from wrapping */
-            min-width: 100px; /* Ensures tabs have a minimum width */
-            flex: 1; /* Distributes tabs evenly across the width */
-        }
-
-        .tab-btn:hover {
-            background: #ddd;
-        }
-
-        .tab-btn.active {
-            background: #007bff; /* Blue background for active tab, matching the image */
-            color: white;
-            border-bottom: 2px solid #0056b3;
-        }
-
-        .tab-content {
-            padding: 60px 20px 20px; /* Add padding at the top to account for fixed tab bar */
-            border: 1px solid #ccc;
-            border-top: none;
-            margin-top: 0; /* Ensure no gap under tabs */
-        }
-
-        .tab-pane {
-            display: none;
-        }
-
-        .tab-pane.active {
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-icon active" data-icon="menu"><i class="fas fa-bars"></i></div> <!-- Menu icon (3 lines) -->
-        <div class="sidebar-icon" data-icon="file"><i class="fas fa-file"></i></div> <!-- File icon -->
-        <div class="sidebar-icon" data-icon="folder"><i class="fas fa-folder"></i></div> <!-- Folder icon -->
-        <div class="sidebar-icon" data-icon="pdf"><i class="fas fa-file-pdf"></i></div> <!-- PDF icon -->
-        <div class="sidebar-icon" data-icon="document"><i class="fas fa-file-alt"></i></div> <!-- Document icon -->
-        <div class="sidebar-icon" data-icon="email"><i class="fas fa-envelope"></i></div> <!-- Email icon with badge (2) -->
-        <div class="sidebar-icon" data-icon="message"><i class="fas fa-comment"></i></div> <!-- Message icon -->
-        <div class="sidebar-icon" data-icon="inbox"><i class="fas fa-inbox"></i></div> <!-- Inbox icon -->
-        <div class="sidebar-icon" data-icon="sent"><i class="fas fa-paper-plane"></i></div> <!-- Sent icon -->
-        <div class="sidebar-icon" data-icon="settings"><i class="fas fa-cog"></i></div> <!-- Settings icon -->
-        <div class="sidebar-icon" data-icon="gear"><i class="fas fa-tools"></i></div> <!-- Gear icon -->
+        <div class="sidebar-icon active" data-icon="menu"><i class="fas fa-bars"></i></div>
+        <div class="sidebar-icon" data-icon="file"><i class="fas fa-file"></i></div>
+        <div class="sidebar-icon" data-icon="folder"><i class="fas fa-folder"></i></div>
+        <div class="sidebar-icon" data-icon="pdf"><i class="fas fa-file-pdf"></i></div>
+        <div class="sidebar-icon" data-icon="document"><i class="fas fa-file-alt"></i></div>
+        <div class="sidebar-icon" data-icon="email"><i class="fas fa-envelope"></i></div>
+        <div class="sidebar-icon" data-icon="message"><i class="fas fa-comment"></i></div>
+        <div class="sidebar-icon" data-icon="inbox"><i class="fas fa-inbox"></i></div>
+        <div class="sidebar-icon" data-icon="sent"><i class="fas fa-paper-plane"></i></div>
+        <div class="sidebar-icon" data-icon="settings"><i class="fas fa-cog"></i></div>
     </div>
 
-    <!-- Notebook (Tabs and Content) -->
+    <!-- Notebook Tabs -->
     <div class="notebook">
         <div class="tab-buttons">
-            <button class="tab-btn active" data-tab="dashboard">DASHBOARD</button>
-            <button class="tab-btn" data-tab="receipt">RECEIPT</button>
-            <button class="tab-btn" data-tab="create">CREATE</button>
-            <button class="tab-btn" data-tab="inbox">Inbox</button>
-            <button class="tab-btn" data-tab="sent">Sent</button>
-            <button class="tab-btn" data-tab="advanceSearch1">Advance Search</button>
-            <button class="tab-btn" data-tab="file">FILE</button>
-            <button class="tab-btn" data-tab="issue">ISSUE</button>
-            <button class="tab-btn" data-tab="returned">Returned</button>
-            <button class="tab-btn" data-tab="advanceSearch2">Advance Search</button>
+            <button class="tab-btn active" hx-get="{% url 'load_tab' 1 %}" hx-target="#tab-content" hx-swap="innerHTML">DASHBOARD</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 2 %}" hx-target="#tab-content" hx-swap="innerHTML">RECEIPT</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 3 %}" hx-target="#tab-content" hx-swap="innerHTML">CREATE</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 4 %}" hx-target="#tab-content" hx-swap="innerHTML">Inbox</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 5 %}" hx-target="#tab-content" hx-swap="innerHTML">Sent</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 6 %}" hx-target="#tab-content" hx-swap="innerHTML">Advance Search</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 7 %}" hx-target="#tab-content" hx-swap="innerHTML">FILE</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 8 %}" hx-target="#tab-content" hx-swap="innerHTML">ISSUE</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 9 %}" hx-target="#tab-content" hx-swap="innerHTML">Returned</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML">Advance Search</button>
         </div>
-        <div class="tab-content">
-            <div id="dashboard" class="tab-pane active">
-                <h2>DASHBOARD Content</h2>
-                <p>This is the content for the DASHBOARD tab.</p>
-            </div>
-            <div id="receipt" class="tab-pane">
-                <h2>RECEIPT Content</h2>
-                <p>This is the content for the RECEIPT tab.</p>
-            </div>
-            <div id="create" class="tab-pane">
-                <h2>CREATE Content</h2>
-                <p>This is the content for the CREATE tab.</p>
-            </div>
-            <div id="inbox" class="tab-pane">
-                <h2>Inbox Content</h2>
-                <p>This is the content for the Inbox tab.</p>
-            </div>
-            <div id="sent" class="tab-pane">
-                <h2>Sent Content</h2>
-                <p>This is the content for the Sent tab.</p>
-            </div>
-            <div id="advanceSearch1" class="tab-pane">
-                <h2>Advance Search 1 Content</h2>
-                <p>This is the content for the first Advance Search tab.</p>
-            </div>
-            <div id="file" class="tab-pane">
-                <h2>FILE Content</h2>
-                <p>This is the content for the FILE tab.</p>
-            </div>
-            <div id="issue" class="tab-pane">
-                <h2>ISSUE Content</h2>
-                <p>This is the content for the ISSUE tab.</p>
-            </div>
-            <div id="returned" class="tab-pane">
-                <h2>Returned Content</h2>
-                <p>This is the content for the Returned tab.</p>
-            </div>
-            <div id="advanceSearch2" class="tab-pane">
-                <h2>Advance Search 2 Content</h2>
-                <p>This is the content for the second Advance Search tab.</p>
-            </div>
+
+        <div id="tab-content">
+            <h3>Welcome! Click on Tabs to Load Content</h3>
         </div>
     </div>
 
     <script>
-        // Tab switching logic (unchanged from previous version)
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        const tabPanes = document.querySelectorAll('.tab-pane');
-
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabPanes.forEach(pane => pane.classList.remove('active'));
-                button.classList.add('active');
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+        // Add active class to clicked tab button
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
             });
         });
 
-        // Sidebar icon interactivity
+        // Sidebar Click Active
         const sidebarIcons = document.querySelectorAll('.sidebar-icon');
         sidebarIcons.forEach(icon => {
             icon.addEventListener('click', () => {
                 sidebarIcons.forEach(i => i.classList.remove('active'));
                 icon.classList.add('active');
-                // You can add custom logic here, like showing content or triggering actions for each icon
             });
         });
     </script>

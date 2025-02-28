@@ -1,0 +1,147 @@
+
+<style>
+  
+</style>
+<section class="tab3-sec">
+<div class="land-request-container">
+    <div class="land-request-doc-viewer">
+        <div class="land-request-upload-section">
+            <input type="file" id="land-request-pdf-upload" name="land-request-pdf-upload" accept="application/pdf" class="land-request-input" style="display: none;">
+            <button class="land-request-upload-btn" onclick="document.getElementById('land-request-pdf-upload').click()">Upload ↑</button>
+            <button class="land-request-remove-btn" onclick="removePDF()">Remove ×</button>
+            <span class="land-request-pdf-info">Pdf Only ≤ 20 MB *</span>
+        </div>
+        <div class="land-request-pdf-display" id="land-request-pdf-display">
+            <p>Document Viewer (Placeholder for uploaded document)</p>
+        </div>
+    </div>
+    <div class="land-request-form-section">
+        <h2 class="land-request-heading">Nature Details</h2>
+        <div class="land-request-form-group land-request-radio-group">
+            <label class="land-request-label">Request Type:</label>
+            <input type="radio" id="land-request-electronic" name="land-request-requestType" value="electronic">
+            <label for="land-request-electronic">Electronic</label>
+            <input type="radio" id="land-request-physical" name="land-request-requestType" value="physical">
+            <label for="land-request-physical">Physical</label>
+        </div>
+
+        <h3 class="land-request-heading">Personal Details</h3>
+        <div class="land-request-form-columns">
+            <div class="land-request-column">
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-fullName">Full Name:</label>
+                    <input type="text" id="land-request-fullName" name="land-request-fullName" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-email">Email:</label>
+                    <input type="email" id="land-request-email" name="land-request-email" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-phoneNumber">Phone Number:</label>
+                    <input type="number" id="land-request-phoneNumber" name="land-request-phoneNumber" class="land-request-input">
+                </div>
+            </div>
+            <div class="land-request-column">
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-aadharNumber">Aadhar Number:</label>
+                    <input type="number" id="land-request-aadharNumber" name="land-request-aadharNumber" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-dob">Date of Birth:</label>
+                    <input type="date" id="land-request-dob" name="land-request-dob" class="land-request-input">
+                </div>
+            </div>
+        </div>
+
+        <h3 class="land-request-heading">Land Registration Details</h3>
+        <div class="land-request-form-columns">
+            <div class="land-request-column">
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-ownerName">Owner Name:</label>
+                    <input type="text" id="land-request-ownerName" name="land-request-ownerName" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-surveyNumber">Survey Number:</label>
+                    <input type="text" id="land-request-surveyNumber" name="land-request-surveyNumber" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-area">Area (in sq. ft):</label>
+                    <input type="number" id="land-request-area" name="land-request-area" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-address">Address:</label>
+                    <input type="text" id="land-request-address" name="land-request-address" class="land-request-input">
+                </div>
+            </div>
+            <div class="land-request-column">
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-state">State:</label>
+                    <input type="text" id="land-request-state" name="land-request-state" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-cityDistrict">City/District:</label>
+                    <input type="text" id="land-request-cityDistrict" name="land-request-cityDistrict" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-pinCode">Pin Code:</label>
+                    <input type="number" id="land-request-pinCode" name="land-request-pinCode" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-mainCategory">Main Category:</label>
+                    <input type="text" id="land-request-mainCategory" name="land-request-mainCategory" class="land-request-input">
+                </div>
+                <div class="land-request-form-group">
+                    <label class="land-request-label" for="land-request-subCategory">Sub Category:</label>
+                    <input type="text" id="land-request-subCategory" name="land-request-subCategory" class="land-request-input">
+                </div>
+            </div>
+        </div>
+
+        <div class="land-request-checkbox">
+            <input type="checkbox" id="land-request-acknowledgement" name="land-request-acknowledgement">
+            <label for="land-request-acknowledgement">Personalize Acknowledgement</label>
+        </div>
+
+        <button type="submit" class="land-request-button">Generate</button>
+    </div>
+</div>
+<footer class="land-request-footer">
+    Copyright © 2025, designed and developed by NTTW
+</footer>
+
+<script>
+    let pdfUrl = null;
+
+    document.getElementById('land-request-pdf-upload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            // Check if file is a PDF
+            if (file.type !== 'application/pdf') {
+                alert('Please upload a PDF file only.');
+                e.target.value = '';
+                return;
+            }
+            // Check file size (20 MB in bytes = 20 * 1024 * 1024)
+            if (file.size > 20 * 1024 * 1024) {
+                alert('File size must be less than or equal to 20 MB.');
+                e.target.value = '';
+                return;
+            }
+            // Create a URL for the PDF and display it in an iframe
+            pdfUrl = URL.createObjectURL(file);
+            const pdfDisplay = document.getElementById('land-request-pdf-display');
+            pdfDisplay.innerHTML = `<iframe src="${pdfUrl}" width="100%" height="100%" style="border: none;"></iframe>`;
+        }
+    });
+
+    function removePDF() {
+        const pdfDisplay = document.getElementById('land-request-pdf-display');
+        pdfDisplay.innerHTML = '<p>Document Viewer (Placeholder for uploaded document)</p>';
+        document.getElementById('land-request-pdf-upload').value = '';
+        if (pdfUrl) {
+            URL.revokeObjectURL(pdfUrl); // Clean up the object URL
+            pdfUrl = null;
+        }
+    }
+</script>
+</section>

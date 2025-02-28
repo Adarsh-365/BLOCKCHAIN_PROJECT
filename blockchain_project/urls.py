@@ -24,4 +24,6 @@ urlpatterns = [
     path('official_reg',views.officail_registration,name='official_reg'),
     path('main',views.main,name='main'),
     path('tab',views.tab,name='tab'),
+    path('dashboard',views.dashboard,name='dashboard'),
+    path('load_tab/<int:tab>/', views.load_tab, name='load_tab'),
 ]
