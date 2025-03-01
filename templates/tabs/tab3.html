@@ -140,4 +140,53 @@
             }
         }
     </script>
+    
+        <script>
+            document.querySelector('.land-request-button').addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default form submission
+        
+                // Create FormData object to handle both form fields and file upload
+                let formData = new FormData();
+                let fileInput = document.getElementById('land-request-pdf-upload');
+                if (fileInput.files[0]) {
+                    formData.append('land-request-pdf-upload', fileInput.files[0]);
+                }
+        
+                // Add other form fields
+                formData.append('land-request-requestType', document.querySelector('input[name="land-request-requestType"]:checked')?.value || '');
+                formData.append('land-request-fullName', document.getElementById('land-request-fullName').value);
+                formData.append('land-request-email', document.getElementById('land-request-email').value);
+                formData.append('land-request-phoneNumber', document.getElementById('land-request-phoneNumber').value);
+                formData.append('land-request-aadharNumber', document.getElementById('land-request-aadharNumber').value);
+                formData.append('land-request-dob', document.getElementById('land-request-dob').value);
+                formData.append('land-request-ownerName', document.getElementById('land-request-ownerName').value);
+                formData.append('land-request-surveyNumber', document.getElementById('land-request-surveyNumber').value);
+                formData.append('land-request-area', document.getElementById('land-request-area').value);
+                formData.append('land-request-address', document.getElementById('land-request-address').value);
+                formData.append('land-request-state', document.getElementById('land-request-state').value);
+                formData.append('land-request-cityDistrict', document.getElementById('land-request-cityDistrict').value);
+                formData.append('land-request-pinCode', document.getElementById('land-request-pinCode').value);
+                formData.append('land-request-mainCategory', document.getElementById('land-request-mainCategory').value);
+                formData.append('land-request-subCategory', document.getElementById('land-request-subCategory').value);
+                formData.append('land-request-acknowledgement', document.getElementById('land-request-acknowledgement').checked);
+        
+                // Send AJAX request
+                fetch('', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'  // Required for Django to recognize AJAX
+                    }
+                })
+                .then(() => {
+                    // Show alert as soon as the request is sent, without waiting for response
+                    alert('Form submitted successfully!');
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    alert('An error occurred while submitting the form.');
+                });
+            });
+        </script>
+   
 </section>
