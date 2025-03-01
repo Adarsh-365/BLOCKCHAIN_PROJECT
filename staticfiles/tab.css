@@ -57,21 +57,21 @@ body {
 
 /* Notebook (Tabs and Content) Styles */
 .notebook {
+    margin-top: 50px; /* Adjust margin to prevent overlap */
     margin-left: 60px; /* Offset for the sidebar width */
     width: calc(100% - 60px); /* Full width minus sidebar */
 }
 
 .tab-buttons {
-    display: flex;
-    position: fixed; /* Stick to the top of the viewport */
-    top: 0;
-    left: 60px; /* Start after the sidebar */
-    width: calc(100% - 60px); /* Span the full width minus sidebar */
+    position: sticky; /* Stick tabs below the header */
+   /* Height of the header */
+    z-index: 1000; /* Below header but above content */
+    background: #f1f1f1;
     border-bottom: 1px solid #ccc;
-    background: #f1f1f1; /* Background for the tab bar */
-    z-index: 1000; /* Ensure tabs stay on top of content */
-    overflow-x: auto; /* Allows horizontal scrolling if tabs overflow */
+    overflow-x: auto;
 }
+
+
 
 .tab-btn {
     padding: 10px 20px;
@@ -109,4 +109,162 @@ body {
 
 .tab-pane.active {
     display: block;
+}
+
+
+header {
+    position: fixed; /* Fix the header at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 1100; /* Higher than sidebar and notebook */
+    background-color: #003399; /* Dark blue background */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: 30px;
+}
+
+
+
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.globe-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #00ccff; /* Light blue for globe */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.language-button {
+    background-color: #0066cc; /* Slightly lighter blue */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-button i {
+    font-size: 16px;
+}
+
+.language-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+    border-radius: 5px;
+}
+
+.language-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.language-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.language-dropdown:hover .language-content {
+    display: block;
+}
+
+.language-dropdown:hover .language-button {
+    background-color: #0052a3;
+}
+
+.notification-icon, .user-icon {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #0066cc;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #0052a3;
+}
+
+.post-button {
+    background-color: #ff6600; /* Orange for Post button */
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.post-button:hover {
+    background-color: #cc5200;
 }
