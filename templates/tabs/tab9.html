@@ -1,0 +1,133 @@
+<section class="tab3-sec">
+    <style>
+   
+
+        .appStatus-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        .appStatus-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .appStatus-select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            flex: 1;
+        }
+
+        .appStatus-date {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 150px;
+        }
+
+        .appStatus-entry {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: block;
+        }
+
+        .appStatus-appId {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .appStatus-details {
+            color: #666;
+            margin: 2px 0;
+        }
+
+        .appStatus-status {
+            font-weight: bold;
+        }
+
+        .Pending {
+            color: #ff9800; /* Orange for Pending */
+        }
+
+        .Completed {
+            color: #4caf50; /* Green for Completed */
+        }
+
+        .Rejected {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+<div class="appStatus-container">
+    <div class="appStatus-header">
+        <select class="appStatus-select" id="statusFilter">
+            <option value="">All Status</option>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+        <input type="date" class="appStatus-date" id="dateFilter">
+    </div>
+
+    <div class="appStatus-entries">
+        <div class="appStatus-entry">
+            <div class="appStatus-appId">APP001 2024-03-20</div>
+            <div class="appStatus-details">Type: Land Registration</div>
+            <div class="appStatus-details">Status: <span class="appStatus-status Pending">Pending</span></div>
+            <div class="appStatus-details">Last Updated: 2024-03-20</div>
+        </div>
+        <div class="appStatus-entry">
+            <div class="appStatus-appId">APP002 2024-03-19</div>
+            <div class="appStatus-details">Type: Land Registration</div>
+            <div class="appStatus-details">Status: <span class="appStatus-status Completed">Completed</span></div>
+            <div class="appStatus-details">Last Updated: 2024-03-19</div>
+        </div>
+        <div class="appStatus-entry">
+            <div class="appStatus-appId">APP003 2024-03-18</div>
+            <div class="appStatus-details">Type: Land Registration</div>
+            <div class="appStatus-details">Status: <span class="appStatus-status Rejected">Rejected</span></div>
+            <div class="appStatus-details">Last Updated: 2024-03-18</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('statusFilter').addEventListener('change', filterItems);
+    document.getElementById('dateFilter').addEventListener('change', filterItems);
+
+    function filterItems() {
+        const status = document.getElementById('statusFilter').value;
+        const date = document.getElementById('dateFilter').value;
+        const entries = document.querySelectorAll('.appStatus-entry');
+
+        entries.forEach(entry => {
+            const entryDate = entry.querySelector('.appStatus-appId').textContent.split(' ')[1].trim();
+            const statusElement = entry.querySelector('.appStatus-status');
+            const statusText = statusElement ? statusElement.textContent.trim() : '';
+
+            const matchesStatus = status === "" || status.toLowerCase() === statusText.toLowerCase();
+            const matchesDate = date === "" || entryDate === date;
+
+            if (matchesStatus && matchesDate) {
+                entry.style.display = 'block';
+            } else {
+                entry.style.display = 'none';
+            }
+        });
+    }
+
+    window.onload = filterItems; // Page Load Show All Data
+</script>
+</section>

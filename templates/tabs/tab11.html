@@ -1,0 +1,476 @@
+<section class='tab3-sec'>
+    <style>
+      
+
+        .transfer-container, .transfer-form-container, .transfer-download-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .transfer-form-container, .transfer-download-container {
+            display: none;
+        }
+
+        .transfer-header, .transfer-form-header, .transfer-download-header {
+            padding: 16px;
+            background-color: #f5f7fa;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .transfer-header-title, .transfer-form-header-title, .transfer-download-header-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #007bff;
+        }
+
+        .transfer-header-title::before, .transfer-form-header-title::before, .transfer-download-header-title::before {
+            content: "↔";
+            font-size: 18px;
+        }
+
+        .transfer-description, .transfer-form-description, .transfer-download-description {
+            padding: 12px 16px;
+            color: #666;
+            font-size: 14px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transfer-buttons, .transfer-form-buttons, .transfer-download-buttons {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transfer-button, .transfer-form-button, .transfer-download-button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            background-color: #4da8da;
+            text-align: center;
+        }
+
+        .transfer-button.new, .transfer-form-button.new, .transfer-download-button.new {
+            background-color: #4da8da;
+        }
+
+        .transfer-button.track, .transfer-form-button.track, .transfer-download-button.track {
+            background-color: #4da8da;
+        }
+
+        .transfer-button.download, .transfer-form-button.download, .transfer-download-button.download {
+            background-color: #4da8da;
+        }
+
+        .transfer-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transfer-table th, .transfer-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transfer-table th {
+            background-color: #f5f7fa;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .transfer-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .transfer-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .transfer-actions a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .transfer-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .transfer-view {
+            color: #007bff;
+        }
+
+        .transfer-download {
+            color: #007bff;
+        }
+
+        .transfer-delete {
+            color: #ff4444;
+        }
+
+        .transfer-form-header-close, .transfer-download-header-close {
+            cursor: pointer;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .transfer-form-content, .transfer-download-content {
+            padding: 20px;
+        }
+
+        .transfer-form-group {
+            margin-bottom: 20px;
+        }
+
+        .transfer-form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .transfer-form-input, .transfer-form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .transfer-form-input:focus, .transfer-form-select:focus {
+            outline: none;
+            border-color: #4da8da;
+            box-shadow: 0 0 4px rgba(77, 168, 218, 0.3);
+        }
+
+        .transfer-form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .transfer-form-textarea:focus {
+            outline: none;
+            border-color: #4da8da;
+            box-shadow: 0 0 4px rgba(77, 168, 218, 0.3);
+        }
+
+        .transfer-form-required {
+            color: #ff4444;
+            margin-left: 4px;
+        }
+
+        .transfer-form-upload {
+            width: 100%;
+            padding: 20px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 4px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+
+        .transfer-form-upload:hover {
+            background-color: #f5f7fa;
+        }
+
+        .transfer-form-upload::before {
+            content: "☁";
+            font-size: 24px;
+            color: #4da8da;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .transfer-form-submit {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            background-color: #4da8da;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .transfer-form-submit:hover {
+            background-color: #3c9ac9;
+        }
+
+        .transfer-track-search {
+            padding: 16px;
+            display: none;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transfer-track-search.active {
+            display: block;
+        }
+
+        .transfer-track-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .transfer-track-input:focus {
+            outline: none;
+            border-color: #4da8da;
+            box-shadow: 0 0 4px rgba(77, 168, 218, 0.3);
+        }
+
+        .transfer-track-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            background-color: #4da8da;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: -1px;
+        }
+
+        .transfer-track-button:hover {
+            background-color: #3c9ac9;
+        }
+
+        .transfer-download-item {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .transfer-download-item:last-child {
+            border-bottom: none;
+        }
+
+        .transfer-download-button {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            background-color: #4da8da;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .transfer-download-button:hover {
+            background-color: #3c9ac9;
+        }
+
+        .transfer-download-icon {
+            font-size: 24px;
+            color: #4da8da;
+            margin-bottom: 8px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="transfer-container">
+        <div class="transfer-header">
+            <div class="transfer-header-title">Ownership Transfer</div>
+        </div>
+        <div class="transfer-description">
+            Initiate and track ownership transfer requests.
+        </div>
+        <div class="transfer-buttons">
+            <button class="transfer-button new" onclick="toggleForm()">+ New Transfer</button>
+            <button class="transfer-button track" onclick="toggleTrackSearch()">Q Track Transfer</button>
+            <button class="transfer-button download" onclick="toggleDownload()">📄 Download Forms</button>
+        </div>
+        <div class="transfer-track-search">
+            <input type="text" class="transfer-track-input" placeholder="Enter Transfer ID">
+            <button class="transfer-track-button">Q Track</button>
+        </div>
+        <table class="transfer-table">
+            <thead>
+                <tr>
+                    <th>Transfer ID</th>
+                    <th>Property Details</th>
+                    <th>Current Owner</th>
+                    <th>New Owner</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TRF001</td>
+                    <td>Plot 123, Chennai</td>
+                    <td>John Doe</td>
+                    <td>Jane Smith</td>
+                    <td>In Progress</td>
+                    <td class="transfer-actions">
+                        <a href="#" class="transfer-view">👁️</a>
+                        <a href="#" class="transfer-download">📄</a>
+                        <a href="#" class="transfer-delete">❌</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="transfer-form-container">
+        <div class="transfer-form-header">
+            <div class="transfer-form-header-title">New Transfer Request</div>
+            <span class="transfer-form-header-close" onclick="hideForm()">✖</span>
+        </div>
+        <div class="transfer-form-description">
+            Initiate and track ownership transfer requests.
+        </div>
+        <div class="transfer-form-buttons">
+            <button class="transfer-form-button new" onclick="toggleForm()">+ New Transfer</button>
+            <button class="transfer-form-button track" onclick="toggleTrackSearch()">Q Track Transfer</button>
+            <button class="transfer-form-button download" onclick="toggleDownload()">📄 Download Forms</button>
+        </div>
+        <div class="transfer-track-search">
+            <input type="text" class="transfer-track-input" placeholder="Enter Transfer ID">
+            <button class="transfer-track-button">Q Track</button>
+        </div>
+        <div class="transfer-form-content">
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">Current Owner Name <span class="transfer-form-required">*</span></label>
+                <input type="text" class="transfer-form-input" required>
+            </div>
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">New Owner Name <span class="transfer-form-required">*</span></label>
+                <input type="text" class="transfer-form-input" required>
+            </div>
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">Property ID/Survey No. <span class="transfer-form-required">*</span></label>
+                <input type="text" class="transfer-form-input" required>
+            </div>
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">Transfer Reason <span class="transfer-form-required">*</span></label>
+                <select class="transfer-form-select" required>
+                    <option value="">Select Reason</option>
+                    <option value="sale">Sale</option>
+                    <option value="inheritance">Inheritance</option>
+                    <option value="gift">Gift</option>
+                </select>
+            </div>
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">Additional Details</label>
+                <textarea class="transfer-form-textarea"></textarea>
+            </div>
+            <div class="transfer-form-group">
+                <label class="transfer-form-label">Upload Supporting Documents</label>
+                <div class="transfer-form-upload">Upload supporting documents</div>
+            </div>
+            <button class="transfer-form-submit">✔ Submit Transfer Request</button>
+        </div>
+    </div>
+
+    <div class="transfer-download-container">
+        <div class="transfer-download-header">
+            <div class="transfer-download-header-title">Ownership Transfer</div>
+            <span class="transfer-download-header-close" onclick="hideDownload()">✖</span>
+        </div>
+        <div class="transfer-download-description">
+            Initiate and track ownership transfer requests.
+        </div>
+        <div class="transfer-download-buttons">
+            <button class="transfer-download-button new" onclick="toggleForm()">+ New Transfer</button>
+            <button class="transfer-download-button track" onclick="toggleTrackSearch()">Q Track Transfer</button>
+            <button class="transfer-download-button download" onclick="toggleDownload()">📄 Download Forms</button>
+        </div>
+        <div class="transfer-download-content">
+            <div class="transfer-download-item">
+                <span class="transfer-download-icon">📊</span>
+                <p>Transfer Status Report</p>
+                <p>View and download your transfer request status</p>
+                <button class="transfer-download-button">Download</button>
+            </div>
+            <div class="transfer-download-item">
+                <span class="transfer-download-icon">⏳</span>
+                <p>Transfer History</p>
+                <p>Download your complete transfer history report</p>
+                <button class="transfer-download-button">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const table = document.querySelector('.transfer-container');
+            const form = document.querySelector('.transfer-form-container');
+            const download = document.querySelector('.transfer-download-container');
+            
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+                table.style.display = 'block';
+                download.style.display = 'none';
+            } else {
+                table.style.display = 'none';
+                form.style.display = 'block';
+                download.style.display = 'none';
+            }
+        }
+
+        function toggleTrackSearch() {
+            const currentContainer = document.querySelector('.transfer-container').style.display === 'block' 
+                ? '.transfer-container' 
+                : document.querySelector('.transfer-form-container').style.display === 'block' 
+                ? '.transfer-form-container' 
+                : '.transfer-download-container';
+            const searchBar = document.querySelector(`${currentContainer} .transfer-track-search`);
+            searchBar.classList.toggle('active');
+        }
+
+        function toggleDownload() {
+            const table = document.querySelector('.transfer-container');
+            const form = document.querySelector('.transfer-form-container');
+            const download = document.querySelector('.transfer-download-container');
+            
+            if (download.style.display === 'block') {
+                download.style.display = 'none';
+                table.style.display = 'block';
+                form.style.display = 'none';
+            } else {
+                table.style.display = 'none';
+                form.style.display = 'none';
+                download.style.display = 'block';
+            }
+        }
+
+        // Show the table by default when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.transfer-container');
+            const form = document.querySelector('.transfer-form-container');
+            const download = document.querySelector('.transfer-download-container');
+            
+            table.style.display = 'block';
+            form.style.display = 'none';
+            download.style.display = 'none';
+        });
+    </script>
+</section>

@@ -7,11 +7,15 @@ from django.conf import settings
 
 
 def home(request):
-    return render(request,"home.html")
+    return render(request,"index.html")
 
 def user_registration(request):
     return render(request,"user_regist.html")
+   
+def forget_pass(request):
+     return render(request,"forget_pass.html")
     
+     
 def officail_registration(request):
     return render(request,"official_reg.html")
     
@@ -74,6 +78,8 @@ def tab(request):
 def dashboard(request):
     return render(request,'dashboard.html')
 
+def user_dashboard(request):
+    return render(request,"user_dashboard.html")
 def load_tab(request, tab):
     # print("does it clalling")
     return render(request, f'tabs/tab{tab}.html')

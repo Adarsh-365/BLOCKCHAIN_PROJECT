@@ -1,0 +1,126 @@
+<section class='tab3-sec'>
+    <style>
+      
+
+        .verification-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .verification-title {
+            color: #2c5282;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .verification-title::before {
+            content: "✓";
+            color: #2c5282;
+            margin-right: 8px;
+        }
+
+        .verification-description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 10px;
+        }
+
+        .verification-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .verification-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .verification-button:hover {
+            background-color: #3182ce;
+        }
+
+        .verification-button.verify-record::before {
+            content: "Q";
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .verification-button.verification-history::before {
+            content: "↺";
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .verification-button.help-guide::before {
+            content: "?";
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .verification-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .verification-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .verification-input:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+        }
+
+        .verification-verify-button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+        }
+
+        .verification-verify-button:hover {
+            background-color: #3182ce;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <div class="verification-title">Verification</div>
+        <div class="verification-description">Verify land records and documents.</div>
+        <div class="verification-buttons">
+            <button class="verification-button verify-record">Verify Record</button>
+            <button class="verification-button verification-history">Verification History</button>
+        </div>
+        <button class="verification-button help-guide">Help Guide</button>
+        <div class="verification-input-container">
+            <input type="text" class="verification-input" placeholder="Enter Record ID or Survey Number">
+            <button class="verification-verify-button">Verify</button>
+        </div>
+    </div>
+</section>

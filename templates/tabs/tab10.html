@@ -1,0 +1,132 @@
+<section class="tab3-sec">
+    <style>
+    
+
+        .survey-table-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .survey-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .survey-table th, .survey-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .survey-table th {
+            background-color: #f5f7fa;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .survey-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .survey-status-verified {
+            color: #2ecc71;
+            font-weight: 500;
+        }
+
+        .survey-status-pending {
+            color: #e67e22;
+            font-weight: 500;
+        }
+
+        .survey-actions {
+            margin-right: 8px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .survey-actions:hover {
+            text-decoration: underline;
+        }
+
+        .survey-pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .survey-pagination button {
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .survey-pagination button.survey-active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .survey-pagination button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-table-container">
+        <table class="survey-table">
+            <thead>
+                <tr>
+                    <th>Survey No.</th>
+                    <th>Owner Name</th>
+                    <th>Area (sq.ft)</th>
+                    <th>Location</th>
+                    <th>Registration Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SUR123</td>
+                    <td>John Doe</td>
+                    <td>1200</td>
+                    <td>Chennai, TN</td>
+                    <td>2024-03-15</td>
+                    <td class="survey-status-verified">Verified</td>
+                    <td class="survey-actions">
+                        <a href="#">👁️</a>
+                        <a href="#">✏️</a>
+                        <a href="#">⬇️</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>SUR124</td>
+                    <td>Jane Smith</td>
+                    <td>2500</td>
+                    <td>Bangalore, KA</td>
+                    <td>2024-03-10</td>
+                    <td class="survey-status-pending">Pending</td>
+                    <td class="survey-actions">
+                        <a href="#">👁️</a>
+                        <a href="#">✏️</a>
+                        <a href="#">⬇️</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="survey-pagination">
+        <button disabled><</button>
+        <button class="survey-active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>></button>
+    </div>
+</section>

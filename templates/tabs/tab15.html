@@ -1,0 +1,144 @@
+<section class='tab3-sec'>
+    <style>
+
+        .download1-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 800px;
+        }
+
+        .download1-title {
+            color: #2d3748;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .download1-title::before {
+            content: "⬇";
+            color: #4299e1;
+            margin-right: 8px;
+        }
+
+        .download1-description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 10px;
+        }
+
+        .download1-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .download1-action-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download1-action-button:hover {
+            background-color: #3182ce;
+        }
+
+        .download1-action-button.available::before {
+            content: "📑";
+            font-size: 16px;
+        }
+
+        .download1-action-button.history::before {
+            content: "↺";
+            font-size: 16px;
+        }
+
+        .download1-downloads {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .download1-card {
+            background-color: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .download1-card-icon {
+            color: #4299e1;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .download1-card-title {
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .download1-card-description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .download1-download-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+        }
+
+        .download1-download-button:hover {
+            background-color: #3182ce;
+        }
+    </style>
+</head>
+<body>
+    <div class="download1-container">
+        <div class="download1-title">Downloads</div>
+        <div class="download1-description">Access and download important documents and forms.</div>
+        <div class="download1-actions">
+            <button class="download1-action-button available">Available for Download</button>
+            <button class="download1-action-button history">Download History</button>
+        </div>
+        <div class="download1-downloads">
+            <div class="download1-card">
+                <div class="download1-card-icon">📜</div>
+                <div class="download1-card-title">Land Record Certificate</div>
+                <div class="download1-card-description">Download your verified land record certificate</div>
+                <button class="download1-download-button">Download</button>
+            </div>
+            <div class="download1-card">
+                <div class="download1-card-icon">📜</div>
+                <div class="download1-card-title">Property Tax Receipt</div>
+                <div class="download1-card-description">Download your latest property tax payment receipt</div>
+                <button class="download1-download-button">Download</button>
+            </div>
+            <div class="download1-card">
+                <div class="download1-card-icon">↺</div>
+                <div class="download1-card-title">Recent Downloads</div>
+                <div class="download1-card-description">View your download history for the last 30 days</div>
+                <button class="download1-download-button">View History</button>
+            </div>
+        </div>
+    </div>
+</section>

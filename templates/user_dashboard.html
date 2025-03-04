@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabbed Notebook with Sidebar and Font Awesome Icons</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_dash.css' %}">
+    <link rel="stylesheet" href="{% static 'tab2.css' %}">
+    <link rel="stylesheet" href="{% static 'tab31.css' %}">
+    <link rel="stylesheet" href="{% static 'tab41.css' %}">
+    <link rel="stylesheet" href="{% static 'tab6.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'tab4.css' %}">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@1.9.2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="globe-icon"></div>
+            <h1 class="header-title">E - Land Records</h1>
+        </div>
+        <div class="header-right">
+            <div class="language-dropdown">
+                <button class="language-button"><i class="fas fa-globe"></i> en</button>
+                <div class="language-content">
+                    <a href="#">English</a>
+                    <a href="#">Español</a>
+                    <a href="#">Français</a>
+                </div>
+            </div>
+            <i class="fas fa-bell notification-icon"></i> <!-- Notification icon -->
+            <div class="dropdown">
+                <button class="dropbtn">Supt. Name</button>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+            <i class="fas fa-user-circle user-icon"></i> <!-- User profile icon -->
+           
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="lsb_container">
+        <!-- User Profile Section -->
+        <div class="lsb_user-profile">
+            <div class="lsb_avatar">K</div>
+            <div class="lsb_user-name">Krishna</div>
+        </div>
+    
+        <!-- Menu Items -->
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-home"></i> Dashboard
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-landmark"></i> Land Records
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 11 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-exchange-alt"></i> Ownership Transfer
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 12 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-check-circle"></i> Verification
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 13 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-chart-bar"></i> Reports
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 14 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-envelope"></i> Messages
+        </div>
+        <div class="lsb_menu-item " hx-get="{% url 'load_tab' 15 %}" hx-target="#tab-content" hx-swap="innerHTML">
+            <i class="fas fa-download"></i> Downloads
+        </div>
+        
+        
+    </div>
+
+    <!-- Notebook Tabs -->
+    <div class="notebook">
+        <div class="tab-buttons1">
+            <button class="tab-btn1 active" hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML"><i class="fa-solid fa-bell"></i> Notification</button>
+            <button class="tab-btn1" hx-get="{% url 'load_tab' 3 %}" hx-target="#tab-content" hx-swap="innerHTML"><i class="fa-solid fa-gear"></i> Settings</button>
+            <button class="tab-btn1" hx-get="{% url 'load_tab' 7 %}" hx-target="#tab-content" hx-swap="innerHTML"><i class="fa-solid fa-user"></i> Profile</button>
+            <button class="tab-btn1" hx-get="{% url 'load_tab' 8 %}" hx-target="#tab-content" hx-swap="innerHTML"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            
+            
+        </div>
+        <div class="tab-buttons">
+            <button class="tab-btn active" hx-get="{% url 'load_tab' 10 %}" hx-target="#tab-content" hx-swap="innerHTML">DASHBOARD</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 3 %}" hx-target="#tab-content" hx-swap="innerHTML">NEW Application</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 7 %}" hx-target="#tab-content" hx-swap="innerHTML">SEARCH RECORD</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 8 %}" hx-target="#tab-content" hx-swap="innerHTML">TRACK APPLICATION</button>
+            <button class="tab-btn" hx-get="{% url 'load_tab' 9 %}" hx-target="#tab-content" hx-swap="innerHTML">APPLICATION HISTORY</button>
+            
+        </div>
+
+        <div id="tab-content">
+            
+        </div>
+    </div>
+
+    <script>
+        // Add active class to clicked tab button
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Sidebar Click Active
+        const sidebarIcons = document.querySelectorAll('.sidebar-icon');
+        sidebarIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                sidebarIcons.forEach(i => i.classList.remove('active'));
+                icon.classList.add('active');
+            });
+        });
+        window.onload = function() {
+            document.querySelector('.tab-btn.active').click();
+        };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all menu items
+            const menuItems = document.querySelectorAll('.lsb_menu-item');
+        
+            // Add click event listener to each menu item
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove lsb_active from all menu items
+                    menuItems.forEach(menuItem => {
+                        menuItem.classList.remove('lsb_active');
+                    });
+        
+                    // Add lsb_active to the clicked item
+                    this.classList.add('lsb_active');
+                });
+            });
+        
+            // Optionally, set the first item (Dashboard) as active by default
+            menuItems[0].classList.add('lsb_active');
+        });
+
+        document.querySelectorAll('.lsb_menu-item').forEach((item, index) => {
+            item.addEventListener('click', function () {
+                document.querySelectorAll('.lsb_menu-item').forEach(btn => btn.classList.remove('lsb_active'));
+                if( index!=0 && index!=1){
+                         document.querySelector('.tab-buttons').style.display = 'none';
+                 }
+                 else{
+                    document.querySelector('.tab-buttons').style.display = 'block'; 
+                 }
+                this.classList.add('lsb_active');
+                console.log(index);
+                console.log(item);
+                // Dynamically Set hx-get URL
+                let url = `/load_tab/${index + 1}/`;  // Dynamically set URL with index
+                this.setAttribute('hx-get', url);
+                this.setAttribute('hx-target', '#tab-content');
+                this.setAttribute('hx-swap', 'innerHTML');
+                this.click(); // Trigger HTMX Request Automatically
+            });
+        });
+        
+        
+    </script>
+   
+        
+</body>
+</html>

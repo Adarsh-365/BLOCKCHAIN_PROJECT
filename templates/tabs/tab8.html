@@ -1,0 +1,101 @@
+<section class="tab3-sec">
+    <style>
+     
+
+        .statusTrack-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        .statusTrack-inputGroup {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .statusTrack-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .statusTrack-trackBtn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            background-color: #00bcd4;
+            color: white;
+        }
+
+        .statusTrack-trackBtn:hover {
+            background-color: #0097a7;
+        }
+
+        .statusTrack-statusSection {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .statusTrack-statusTitle {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .statusTrack-statusItem {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .statusTrack-statusItem:before {
+            content: "📄";
+            margin-right: 8px;
+            color: #999;
+        }
+
+        .statusTrack-currentStatus, 
+        .statusTrack-lastUpdated, 
+        .statusTrack-estimatedCompletion {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .statusTrack-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="statusTrack-container">
+        <div class="statusTrack-inputGroup">
+            <input type="text" id="surId" class="statusTrack-input" placeholder="SUR123" value="SUR123">
+            <button class="statusTrack-trackBtn" onclick="trackStatus()">Track</button>
+        </div>
+        <div id="statusSection" class="statusTrack-statusSection statusTrack-hidden">
+            <div class="statusTrack-statusTitle">Application Status</div>
+            <div class="statusTrack-statusItem">Application Submitted</div>
+            <div class="statusTrack-statusItem">Under Review</div>
+            <div class="statusTrack-statusItem">Verification</div>
+            <div class="statusTrack-statusItem">Completed</div>
+            <div class="statusTrack-currentStatus">Current Status: Application Submitted</div>
+            <div class="statusTrack-lastUpdated">Last Updated: 04/03/2025</div>
+            <div class="statusTrack-estimatedCompletion">Estimated Completion: 11/03/2025</div>
+        </div>
+    </div>
+
+    <script>
+        function trackStatus() {
+            const statusSection = document.getElementById('statusSection');
+            statusSection.classList.remove('statusTrack-hidden');
+        }
+    </script>
+</section>

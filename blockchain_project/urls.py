@@ -21,9 +21,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home),
     path('user_reg',views.user_registration,name='user_reg'),
+    path('forget_pass',views.forget_pass,name='forget_pass'),
     path('official_reg',views.officail_registration,name='official_reg'),
     path('main',views.main,name='main'),
     path('tab',views.tab,name='tab'),
     path('dashboard',views.dashboard,name='dashboard'),
+    path('user_dashboard',views.user_dashboard,name='user_dashboard'),
+    
     path('load_tab/<int:tab>/', views.load_tab, name='load_tab'),
 ]

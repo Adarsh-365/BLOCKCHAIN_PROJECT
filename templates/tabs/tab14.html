@@ -1,0 +1,283 @@
+<section class='tab3-sec'>
+    <style>
+      
+
+        .message-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+
+        .message-title {
+            color: #2d3748;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-title::before {
+            content: "✉";
+            color: #4299e1;
+            margin-right: 8px;
+        }
+
+        .message-description {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 10px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .message-action-button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .message-action-button:hover {
+            background-color: #3182ce;
+        }
+
+        .message-action-button.compose::before {
+            content: "✍";
+            font-size: 16px;
+        }
+
+        .message-action-button.inbox::before {
+            content: "📥";
+            font-size: 16px;
+        }
+
+        .message-action-button.sent::before {
+            content: "✈";
+            font-size: 16px;
+        }
+
+        .message-compose-form, .message-inbox, .message-sent {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .message-compose-form.show, .message-inbox.show, .message-sent.show {
+            display: block;
+        }
+
+        .message-compose-title {
+            color: #2d3748;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .message-compose-title::before {
+            content: "✍";
+            color: #4299e1;
+            margin-right: 8px;
+        }
+
+        .message-close-btn {
+            cursor: pointer;
+            color: #718096;
+            font-size: 16px;
+        }
+
+        .message-form-group {
+            margin-bottom: 15px;
+        }
+
+        .message-label {
+            display: block;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+
+        .message-input, .message-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .message-input:focus, .message-textarea:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+        }
+
+        .message-textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .message-required {
+            color: #e53e3e;
+        }
+
+        .message-send-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            color: white;
+            background-color: #4299e1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .message-send-button:hover {
+            background-color: #3182ce;
+        }
+
+        .message-send-button::before {
+            content: "✈";
+            font-size: 16px;
+        }
+
+        .message-inbox-list, .message-sent-list {
+            margin-top: 20px;
+        }
+
+        .message-inbox-item, .message-sent-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            background-color: #edf2f7;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .message-inbox-sender, .message-sent-recipient {
+            color: #4a5568;
+            font-weight: bold;
+        }
+
+        .message-inbox-content, .message-sent-content {
+            color: #718096;
+            flex-grow: 1;
+            margin: 0 15px;
+        }
+
+        .message-inbox-date, .message-sent-date {
+            color: #718096;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <div class="message-title">Messages</div>
+        <div class="message-description">View and manage your communications.</div>
+        <div class="message-actions">
+            <button class="message-action-button compose" onclick="toggleCompose()">Compose</button>
+            <button class="message-action-button inbox" onclick="toggleInbox()">Inbox</button>
+            <button class="message-action-button sent" onclick="toggleSent()">Sent</button>
+        </div>
+        <div class="message-compose-form" id="composeForm">
+            <div class="message-compose-title">New Message <span class="message-close-btn" onclick="toggleCompose()">×</span></div>
+            <div class="message-form-group">
+                <label class="message-label">To <span class="message-required">*</span></label>
+                <input type="email" class="message-input" placeholder="Enter recipient's email">
+            </div>
+            <div class="message-form-group">
+                <label class="message-label">Subject <span class="message-required">*</span></label>
+                <input type="text" class="message-input" placeholder="Enter message subject">
+            </div>
+            <div class="message-form-group">
+                <label class="message-label">Message <span class="message-required">*</span></label>
+                <textarea class="message-textarea" placeholder="Type your message here"></textarea>
+            </div>
+            <button class="message-send-button">Send Message</button>
+        </div>
+        <div class="message-inbox" id="inboxView">
+            <div class="message-inbox-list">
+                <div class="message-inbox-item">
+                    <div class="message-inbox-sender">Admin</div>
+                    <div class="message-inbox-content">Document Verification Complete</div>
+                    <div class="message-inbox-date">2024-03-20</div>
+                </div>
+                <div class="message-inbox-item">
+                    <div class="message-inbox-sender">System</div>
+                    <div class="message-inbox-content">Application Status Update</div>
+                    <div class="message-inbox-date">2024-03-19</div>
+                </div>
+            </div>
+        </div>
+        <div class="message-sent" id="sentView">
+            <div class="message-sent-list">
+                <div class="message-sent-item">
+                    <div class="message-sent-recipient">To: Support Team</div>
+                    <div class="message-sent-content">Query about Land Registration</div>
+                    <div class="message-sent-date">2024-03-18</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCompose() {
+            const composeForm = document.getElementById('composeForm');
+            const inboxView = document.getElementById('inboxView');
+            const sentView = document.getElementById('sentView');
+            composeForm.classList.toggle('show');
+            if (inboxView.classList.contains('show')) {
+                inboxView.classList.remove('show');
+            }
+            if (sentView.classList.contains('show')) {
+                sentView.classList.remove('show');
+            }
+        }
+
+        function toggleInbox() {
+            const composeForm = document.getElementById('composeForm');
+            const inboxView = document.getElementById('inboxView');
+            const sentView = document.getElementById('sentView');
+            inboxView.classList.toggle('show');
+            if (composeForm.classList.contains('show')) {
+                composeForm.classList.remove('show');
+            }
+            if (sentView.classList.contains('show')) {
+                sentView.classList.remove('show');
+            }
+        }
+
+        function toggleSent() {
+            const composeForm = document.getElementById('composeForm');
+            const inboxView = document.getElementById('inboxView');
+            const sentView = document.getElementById('sentView');
+            sentView.classList.toggle('show');
+            if (composeForm.classList.contains('show')) {
+                composeForm.classList.remove('show');
+            }
+            if (inboxView.classList.contains('show')) {
+                inboxView.classList.remove('show');
+            }
+        }
+    </script>
+</section>
