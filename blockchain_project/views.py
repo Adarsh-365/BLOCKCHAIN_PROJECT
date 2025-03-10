@@ -23,7 +23,7 @@ def main(request):
     return render(request,'main.html')
 
 def clerk_dashboard(request):
-    return render(request, 'clerk.dashboard.html')
+    return render(request, 'clerkdashboard.html')
 
 def district_collector_dashboard(request):
     return render(request, 'districtcollectordashboard.html')

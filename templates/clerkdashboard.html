@@ -1,24 +1,440 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>clerk Dashboard
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Land Records - Clerk Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    
+    <script>
+      function showDashboardSection(sectionId) {
+        // Hide all sections first
+        const sections = document.querySelectorAll(".content > div");
+        sections.forEach((section) => {
+          section.style.display = "none";
+        });
 
-        </title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        This is clerk Dashboard
-        <script src="" async defer></script>
-    </body>
+        // Show the selected section
+        switch (sectionId) {
+          case "pendingApplications":
+            document.getElementById(
+              "pendingApplicationsSection"
+            ).style.display = "block";
+            break;
+          case "documentVerification":
+            document.getElementById(
+              "documentVerificationSection"
+            ).style.display = "block";
+            break;
+          case "recordManagement":
+            document.getElementById("recordManagementSection").style.display =
+              "block";
+            break;
+          case "reports":
+            document.getElementById("reportsSection").style.display = "block";
+            break;
+          case "tasks":
+            document.getElementById("tasksSection").style.display = "block";
+            break;
+          case "communications":
+            document.getElementById("communicationsSection").style.display =
+              "block";
+            break;
+        }
+      }
+
+      function handleApplicationProcess(applicationId) {
+        // Implementation for processing applications
+        alert(`Processing application ${applicationId}`);
+      }
+
+      function handleDocumentVerification(documentId) {
+        // Implementation for document verification
+        alert(`Verifying document ${documentId}`);
+      }
+
+      function updateApplicationStatus(applicationId, status) {
+        // Implementation for updating application status
+        alert(`Updating application ${applicationId} to ${status}`);
+      }
+
+      function generateReport(reportType) {
+        // Implementation for generating reports
+        alert(`Generating ${reportType} report`);
+      }
+
+      function showNotifications() {
+        // Create and show notifications panel
+        const modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2><i class="fas fa-bell"></i> Notifications</h2>
+              <button class="close-button" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="notifications-panel">
+                <div class="notification-list">
+                  <div class="notification-item">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="notification-content">
+                      <div class="notification-title">New Application Received</div>
+                      <div class="notification-time">2 minutes ago</div>
+                    </div>
+                  </div>
+                  <div class="notification-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="notification-content">
+                      <div class="notification-title">Document Verification Required</div>
+                      <div class="notification-time">1 hour ago</div>
+                    </div>
+                  </div>
+                  <!-- Add more notification items as needed -->
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      function showTasks() {
+        // Create and show tasks panel
+        const modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2><i class="fas fa-tasks"></i> Tasks</h2>
+              <button class="close-button" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="task-list">
+                <div class="task-item">
+                  <input type="checkbox" id="task1">
+                  <label for="task1">Review pending applications</label>
+                  <span class="task-date">Today</span>
+                </div>
+                <div class="task-item">
+                  <input type="checkbox" id="task2">
+                  <label for="task2">Verify submitted documents</label>
+                  <span class="task-date">Today</span>
+                </div>
+                <div class="task-item">
+                  <input type="checkbox" id="task3">
+                  <label for="task3">Generate monthly report</label>
+                  <span class="task-date">Tomorrow</span>
+                </div>
+                <!-- Add more task items as needed -->
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      function showProfile() {
+        // Create and show profile panel
+        const modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2><i class="fas fa-user"></i> Profile</h2>
+              <button class="close-button" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+              <div class="profile-panel">
+                <div class="profile-content">
+                  <div class="profile-info">
+                    <div class="profile-avatar">
+                      <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Clerk Name</h4>
+                    <p>IDTA Office</p>
+                  </div>
+                  <div class="profile-details">
+                    <div class="detail-item">
+                      <label>Employee ID</label>
+                      <input type="text" value="CLK001" readonly>
+                    </div>
+                    <div class="detail-item">
+                      <label>Email</label>
+                      <input type="email" value="clerk@idta.gov.in" class="editable">
+                    </div>
+                    <div class="detail-item">
+                      <label>Phone</label>
+                      <input type="tel" value="+91 9876543210" class="editable">
+                    </div>
+                    <div class="detail-item">
+                      <label>Department</label>
+                      <input type="text" value="Land Records" readonly>
+                    </div>
+                  </div>
+                  <button class="edit-profile-button">
+                    <i class="fas fa-edit"></i> Edit Profile
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        // Add event listener for edit profile button
+        const editButton = modal.querySelector(".edit-profile-button");
+        const editableInputs = modal.querySelectorAll(".editable");
+        editButton.addEventListener("click", function () {
+          if (this.textContent.includes("Edit")) {
+            editableInputs.forEach((input) =>
+              input.removeAttribute("readonly")
+            );
+            this.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+          } else {
+            editableInputs.forEach((input) =>
+              input.setAttribute("readonly", true)
+            );
+            this.innerHTML = '<i class="fas fa-edit"></i> Edit Profile';
+            // Here you would typically save the changes to a server
+            alert("Profile changes saved successfully!");
+          }
+        });
+      }
+
+      function handleLogout() {
+        if (confirm("Are you sure you want to logout?")) {
+          // Clear any session storage or cookies if needed
+          window.location.href = "index.html";
+        }
+      }
+    </script>
+  </head>
+  <body class="clerk-dashboard">
+    <div class="nav_bar">
+    <div class="blue-line">
+      <div class="logo-container">
+        <img src="/static/images/LOGO.png" alt="Logo" />
+        <span class="title">E-Land Records</span>
+      </div>
+      <span class="header-title">IDTA Office - Clerk Dashboard</span>
+    </div>
+
+    <div class="second-bar">
+      <div class="menu-item" onclick="showNotifications()">
+        <i class="fas fa-bell"></i>
+        <span>Notifications</span>
+      </div>
+      <div class="menu-item" onclick="showTasks()">
+        <i class="fas fa-tasks"></i>
+        <span>Tasks</span>
+      </div>
+      <div class="menu-item" onclick="showProfile()">
+        <i class="fas fa-user"></i>
+        <span>Profile</span>
+      </div>
+      <div class="menu-item" onclick="handleLogout()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+
+    <div class="sidebar">
+      <div class="user-logo"><i class="fas fa-user-tie"></i></div>
+      <div class="user-name">Clerk Dashboard</div>
+      <div class="user-role">IDTA Office</div>
+      <ul>
+        <li>
+          <a
+            href="#"
+            class="active"
+            onclick="showDashboardSection('pendingApplications')"
+          >
+            <i class="fas fa-clipboard-list"></i>
+            <span>Pending Applications</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showDashboardSection('documentVerification')">
+            <i class="fas fa-file-check"></i>
+            <span>Document Verification</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showDashboardSection('recordManagement')">
+            <i class="fas fa-folder-open"></i>
+            <span>Record Management</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showDashboardSection('reports')">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports & Statistics</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showDashboardSection('tasks')">
+            <i class="fas fa-tasks"></i>
+            <span>Daily Tasks</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showDashboardSection('communications')">
+            <i class="fas fa-comments"></i>
+            <span>Communications</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content">
+      <!-- Pending Applications Section -->
+      <div id="pendingApplicationsSection" class="rectangle">
+        <div class="rectangle-title">
+          <i class="fas fa-clipboard-list"></i>
+          <span>Pending Applications</span>
+        </div>
+        <div class="rectangle-notes">
+          Process and manage pending land record applications.
+        </div>
+        <div class="quick-actions">
+          <button class="action-button">
+            <i class="fas fa-filter"></i>
+            Filter
+          </button>
+          <button class="action-button">
+            <i class="fas fa-sort"></i>
+            Sort
+          </button>
+          <div class="search-box">
+            <input type="text" placeholder="Search applications..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+        <div class="applications-table">
+          <table class="records-table">
+            <thead>
+              <tr>
+                <th>Application ID</th>
+                <th>Type</th>
+                <th>Submitted Date</th>
+                <th>Applicant</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>APP001</td>
+                <td>Land Registration</td>
+                <td>2024-03-04</td>
+                <td>John Doe</td>
+                <td><span class="status-badge pending">Pending</span></td>
+                <td>
+                  <div class="action-icons">
+                    <i class="fas fa-eye" title="View Details"></i>
+                    <i class="fas fa-check-circle" title="Approve"></i>
+                    <i class="fas fa-times-circle" title="Reject"></i>
+                    <i class="fas fa-comment" title="Add Comment"></i>
+                  </div>
+                </td>
+              </tr>
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Document Verification Section -->
+      <div
+        id="documentVerificationSection"
+        class="rectangle"
+        style="display: none"
+      >
+        <div class="rectangle-title">
+          <i class="fas fa-file-check"></i>
+          <span>Document Verification</span>
+        </div>
+        <div class="rectangle-notes">
+          Verify and validate submitted documents and certificates.
+        </div>
+        <div class="verification-grid">
+          <div class="verification-card">
+            <h3>Land Ownership Documents</h3>
+            <div class="document-list">
+              <!-- Document verification items -->
+            </div>
+          </div>
+          <div class="verification-card">
+            <h3>Survey Documents</h3>
+            <div class="document-list">
+              <!-- Survey document items -->
+            </div>
+          </div>
+          <div class="verification-card">
+            <h3>Tax Records</h3>
+            <div class="document-list">
+              <!-- Tax document items -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Record Management Section -->
+      <div id="recordManagementSection" class="rectangle" style="display: none">
+        <div class="rectangle-title">
+          <i class="fas fa-folder-open"></i>
+          <span>Record Management</span>
+        </div>
+        <div class="rectangle-notes">
+          Manage and organize land records and related documents.
+        </div>
+        <div class="records-grid">
+          <!-- Record management content -->
+        </div>
+      </div>
+
+      <!-- Reports Section -->
+      <div id="reportsSection" class="rectangle" style="display: none">
+        <div class="rectangle-title">
+          <i class="fas fa-chart-bar"></i>
+          <span>Reports & Statistics</span>
+        </div>
+        <div class="reports-grid">
+          <!-- Reports and statistics content -->
+        </div>
+      </div>
+
+      <!-- Tasks Section -->
+      <div id="tasksSection" class="rectangle" style="display: none">
+        <div class="rectangle-title">
+          <i class="fas fa-tasks"></i>
+          <span>Daily Tasks</span>
+        </div>
+        <div class="tasks-grid">
+          <!-- Daily tasks content -->
+        </div>
+      </div>
+
+      <!-- Communications Section -->
+      <div id="communicationsSection" class="rectangle" style="display: none">
+        <div class="rectangle-title">
+          <i class="fas fa-comments"></i>
+          <span>Communications</span>
+        </div>
+        <div class="communications-grid">
+          <!-- Communications content -->
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
