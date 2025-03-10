@@ -27,6 +27,19 @@ urlpatterns = [
     path('tab',views.tab,name='tab'),
     path('dashboard',views.dashboard,name='dashboard'),
     path('user_dashboard',views.user_dashboard,name='user_dashboard'),
+    path('clerk-dashboard/', views.clerk_dashboard, name='clerkdashboard'),
+    path('district-collector-dashboard/', views.district_collector_dashboard, name='districtcollectordashboard'),
+    path('joint-collector-dashboard/', views.joint_collector_dashboard, name='jointcollectordashboard'),
+    path('ministry-welfare-dashboard/', views.ministry_welfare_dashboard, name='ministryofwelfaredashboard'),
+    path('mro-dashboard/', views.mro_dashboard, name='mrodashboard'),
+    path('project-officer-dashboard/', views.project_officer_dashboard, name='projectofficerdashboard'),
+    path('revenue-department-dashboard/', views.revenue_department_dashboard, name='revenuedepartmentofficerdashboard'),
+    path('revenue-inspector-dashboard/', views.revenue_inspector_dashboard, name='revenueinspectordashboard'),
+    path('superintendent-dashboard/', views.superintendent_dashboard, name='superintendentdashboard'),
+    path('surveyor-dashboard/', views.surveyor_dashboard, name='surveyordashboard'),
+    path('ministry_of_welfare_dashboard/', views.ministry_of_welfare_dashboard, name='ministryofwelfaredashboard'),
     
     path('load_tab/<int:tab>/', views.load_tab, name='load_tab'),
+    
+    
 ]

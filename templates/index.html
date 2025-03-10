@@ -31,8 +31,7 @@
                 <h2>User Login</h2>
                 <input type="text" class="form-control" id="userUsername" placeholder="Username">
                 <input type="password" class="form-control" id="userPassword" placeholder="Password">
-                 <br>
-                 <br>
+                 <br><br>
                  
                 <button class="btn btn-primary w-100" id="userLoginBtn">Login</button>
                 
@@ -42,7 +41,7 @@
             <div class="col-md-4 col-sm-6 login-box">
                 <h2>Official Login</h2>
                 <input type="text" class="form-control" id="officialUsername" placeholder="Official ID">
-                <select name="role"  class="form-control"  required="">
+                <select name="role" class="form-control" id="officialRole" required>  <!-- Added id here -->
                     <option value="">Select Role</option>
                     <option value="ministryofwelfare">Ministry of Welfare</option>
                     <option value="districtcollector">District Collector</option>
@@ -58,7 +57,7 @@
                     <option value="superintendent">Superintendent</option>
                     <option value="officer">Officer</option>
                     <option value="clerk">Clerk</option>
-                  </select>
+                </select>
                 <input type="password" class="form-control" id="officialPassword" placeholder="Password">
                 <button class="btn btn-primary w-100" id="officialLoginBtn">Login</button>
                 <br>
@@ -70,54 +69,85 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="{% static 'script.js' %}"></script>
-    <!-- Custom JavaScript -->
     <script>
-        function openPage(pageName) {
-            window.location.href = pageName;
+        // Common Functions
+        function openPage(url) {
+            window.location.href = url;
         }
 
-        // Navigation buttons
-        document.getElementById("homeBtn").addEventListener("click", function() {
-            openPage("main");
-        });
+        // Navigation handlers
+        document.getElementById('homeBtn').addEventListener('click', () => openPage('/'));
+        document.getElementById('aboutBtn').addEventListener('click', () => openPage('/about'));
+        document.getElementById('servicesBtn').addEventListener('click', () => openPage('/services'));
+        document.getElementById('contactBtn').addEventListener('click', () => openPage('/contact'));
+        document.getElementById('helpBtn').addEventListener('click', () => openPage('/help'));
 
-        document.getElementById("aboutBtn").addEventListener("click", function() {
-            openPage("tab");
-        });
+        // User Login Handler
+        document.getElementById('userLoginBtn').addEventListener('click', () => {
+            const username = document.getElementById('userUsername').value;
+            const password = document.getElementById('userPassword').value;
 
-        document.getElementById("servicesBtn").addEventListener("click", function() {
-            openPage("user_dashboard");
-        });
-
-        document.getElementById("contactBtn").addEventListener("click", function() {
-            openPage("contact");
-        });
-
-        document.getElementById("helpBtn").addEventListener("click", function() {
-            openPage("help");
-        });
-
-        // User Login
-        document.getElementById("userLoginBtn").addEventListener("click", function() {
-            const username = document.getElementById("userUsername").value;
-            const password = document.getElementById("userPassword").value;
-            
             if (username === "admin" && password === "admin") {
-                openPage("user_dashboard");
+                openPage('/user-dashboard');
             } else {
-                alert("Invalid username or password");
+                alert('Invalid username or password');
             }
         });
 
-        // Official Login
-        document.getElementById("officialLoginBtn").addEventListener("click", function() {
-            const username = document.getElementById("officialUsername").value;
-            const password = document.getElementById("officialPassword").value;
-            
-            if (username === "admin" && password === "admin") {
-                openPage("main");
+        // Official Login Handler
+        document.getElementById('officialLoginBtn').addEventListener('click', () => {
+            const officialId = document.getElementById('officialUsername').value;
+            const role = document.getElementById('officialRole').value; // Now correctly referenced
+            const password = document.getElementById('officialPassword').value;
+
+            if (!officialId || !role || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (officialId === "admin" && password === "admin") {
+                switch(role) {
+                    case 'clerk':
+                        openPage('/clerk-dashboard');
+                        break;
+                    case 'officer':
+                        openPage('/official-dashboard');
+                        break;
+                    case 'superintendent':
+                        openPage('/superintendent-dashboard');
+                        break;
+                    case 'projectofficer':
+                        openPage('/project-officer-dashboard');
+                        break;
+                    case 'mro':
+                        openPage('/mro-dashboard');
+                        break;
+                    case 'surveyor':
+                        openPage('/surveyor-dashboard');
+                        break;
+                    case 'revenueinspector':
+                        openPage('/revenue-inspector-dashboard');
+                        break;
+                    case 'vro':
+                        openPage('/vro-dashboard');
+                        break;
+                    case 'revenuedepartmentofficer':
+                        openPage('/revenue-department-dashboard');
+                        break;
+                    case 'jointcollector':
+                        openPage('/joint-collector-dashboard');
+                        break;
+                    case 'districtcollector':
+                        openPage('/district-collector-dashboard');
+                        break;
+                    case 'ministryofwelfare':
+                        openPage('/ministry-dashboard');
+                        break;
+                    default:
+                        alert('Invalid role selection');
+                }
             } else {
-                alert("Invalid official ID or password");
+                alert('Invalid credentials');
             }
         });
     </script>

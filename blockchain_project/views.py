@@ -21,6 +21,40 @@ def officail_registration(request):
     
 def main(request):
     return render(request,'main.html')
+
+def clerk_dashboard(request):
+    return render(request, 'clerkdashboard.html')
+
+def district_collector_dashboard(request):
+    return render(request, 'districtcollectordashboard.html')
+
+def joint_collector_dashboard(request):
+    return render(request, 'jointcollectordashboard.html')
+
+def ministry_welfare_dashboard(request):
+    return render(request, 'ministryofwelfaredashboard.html')
+
+def mro_dashboard(request):
+    return render(request, 'mrodashboard.html')
+
+def project_officer_dashboard(request):
+    return render(request, 'projectofficerdashboard.html')
+
+def revenue_department_dashboard(request):
+    return render(request, 'revenuedepartmentofficerdashboard.html')
+
+def revenue_inspector_dashboard(request):
+    return render(request, 'revenueinspectordashboard.html')
+
+def superintendent_dashboard(request):
+    return render(request, 'superintendentdashboard.html')
+
+def surveyor_dashboard(request):
+    return render(request, 'surveyordashboard.html')
+
+def ministry_of_welfare_dashboard(request):
+    return render(request, 'ministryofwelfaredashboard.html')
+
    
 @csrf_exempt   
 def tab(request):
