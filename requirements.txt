@@ -4,3 +4,4 @@ sqlparse==0.5.3
 tzdata==2024.2
 whitenoise==6.8.2
 sqlite3==2.6.0
+loguru==0.7.3
