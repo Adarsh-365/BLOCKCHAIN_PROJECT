@@ -55,7 +55,7 @@
         <!-- User Profile Section -->
         <div class="lsb_user-profile">
             <div class="lsb_avatar">K</div>
-            <div class="lsb_user-name">Krishna</div>
+            <div class="lsb_user-name">{{ username }}</div>
         </div>
     
         <!-- Menu Items -->
@@ -126,6 +126,10 @@
             });
         });
         window.onload = function() {
+            var successMessage = "{{ request.session.success_message|escapejs }}";
+            if (successMessage) {
+                alert(successMessage);
+            }
             document.querySelector('.tab-btn.active').click();
         };
         document.addEventListener('DOMContentLoaded', function() {
@@ -169,7 +173,7 @@
                 this.click(); // Trigger HTMX Request Automatically
             });
         });
-        
+       
         
     </script>
    

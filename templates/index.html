@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E - Land Records</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCm1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head> {% endcomment %}
 <body>
     <header class="header">
         <div class="container d-flex align-items-center justify-content-between">
@@ -25,31 +38,30 @@
             </nav>
         </div>
     </header>
+
     <main class="container mt-5">
         <div class="row login-container justify-content-center">
+            <!-- User Login -->
             <div class="col-md-4 col-sm-6 login-box">
                 <h2>User Login</h2>
                 <input type="text" class="form-control" id="userUsername" placeholder="Username">
                 <input type="password" class="form-control" id="userPassword" placeholder="Password">
-                 <br>
-                 <br>
-                 
+                <br><br>
                 <button class="btn btn-primary w-100" id="userLoginBtn">Login</button>
-                
                 <a href="{% url 'user_reg' %}" class="register-link">Don't have an account? Register</a>
                 <a href="{% url 'forget_pass' %}" class="register-link">Forgot Password?</a>
             </div>
+
+            <!-- Official Login -->
             <div class="col-md-4 col-sm-6 login-box">
                 <h2>Official Login</h2>
                 <input type="text" class="form-control" id="officialUsername" placeholder="Official ID">
-                <select name="role"  class="form-control"  required="">
+                <select id="officialRole" class="form-control" required>
                     <option value="">Select Role</option>
                     <option value="ministryofwelfare">Ministry of Welfare</option>
                     <option value="districtcollector">District Collector</option>
                     <option value="jointcollector">Joint Collector</option>
-                    <option value="revenuedepartmentofficer">
-                      Revenue Department Officer
-                    </option>
+                    <option value="revenuedepartmentofficer">Revenue Department Officer</option>
                     <option value="revenueinspector">Revenue Inspector</option>
                     <option value="vro">VRO (Village Revenue Officer)</option>
                     <option value="mro">MRO (Mandal Revenue Officer)</option>
@@ -58,66 +70,78 @@
                     <option value="superintendent">Superintendent</option>
                     <option value="officer">Officer</option>
                     <option value="clerk">Clerk</option>
-                  </select>
+                </select>
                 <input type="password" class="form-control" id="officialPassword" placeholder="Password">
-                <button class="btn btn-primary w-100" id="officialLoginBtn">Login</button>
                 <br>
+                <button class="btn btn-primary w-100" id="officialLoginBtn">Login</button>
                 <a href="{% url 'official_reg' %}" class="register-link">Don't have an account? Register</a>
                 <a href="{% url 'forget_pass' %}" class="register-link">Forgot Password?</a>
             </div>
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Bootstrap and Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'script.js' %}"></script>
-    <!-- Custom JavaScript -->
+
     <script>
         function openPage(pageName) {
             window.location.href = pageName;
         }
 
         // Navigation buttons
-        document.getElementById("homeBtn").addEventListener("click", function() {
-            openPage("main");
-        });
-
-        document.getElementById("aboutBtn").addEventListener("click", function() {
-            openPage("tab");
-        });
-
-        document.getElementById("servicesBtn").addEventListener("click", function() {
-            openPage("user_dashboard");
-        });
-
-        document.getElementById("contactBtn").addEventListener("click", function() {
-            openPage("contact");
-        });
-
-        document.getElementById("helpBtn").addEventListener("click", function() {
-            openPage("help");
-        });
+        document.getElementById("homeBtn").addEventListener("click", function() { openPage("main"); });
+        document.getElementById("aboutBtn").addEventListener("click", function() { openPage("tab"); });
+        document.getElementById("servicesBtn").addEventListener("click", function() { openPage("user_dashboard"); });
+        document.getElementById("contactBtn").addEventListener("click", function() { openPage("contact"); });
+        document.getElementById("helpBtn").addEventListener("click", function() { openPage("help"); });
 
         // User Login
-        document.getElementById("userLoginBtn").addEventListener("click", function() {
+        document.getElementById("userLoginBtn").addEventListener("click", async function () {
             const username = document.getElementById("userUsername").value;
             const password = document.getElementById("userPassword").value;
-            
-            if (username === "admin" && password === "admin") {
-                openPage("user_dashboard");
+
+            if (!username || !password) {
+                alert("Please enter both username and password.");
+                return;
+            }
+
+            const response = await fetch("user-login/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const result = await response.json();
+            if (result.status === "success") {
+                window.location.href = result.redirect_url;
             } else {
-                alert("Invalid username or password");
+                alert(result.message);
             }
         });
 
         // Official Login
-        document.getElementById("officialLoginBtn").addEventListener("click", function() {
+        document.getElementById("officialLoginBtn").addEventListener("click", async function () {
             const username = document.getElementById("officialUsername").value;
             const password = document.getElementById("officialPassword").value;
-            
-            if (username === "admin" && password === "admin") {
-                openPage("main");
+            const designation = document.getElementById("officialRole").value;
+
+            if (!username || !password || !designation) {
+                alert("Please enter all details.");
+                return;
+            }
+
+            const response = await fetch("/official-login/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password, designation }),
+            });
+
+            const result = await response.json();
+            if (result.status === "success") {
+                window.location.href = result.redirect_url;
             } else {
-                alert("Invalid official ID or password");
+                alert(result.message);
             }
         });
     </script>

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Land Records - User Registration</title>
-    
+
+  
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'user_reg_style.css' %}">
     
@@ -12,12 +14,13 @@
 <body>
     <div class="container">
         <div class="header">
-            <img src="{% static "images/LOGO.png" %}" alt="E-Land Records Logo">
+            <img src="{% static 'images/LOGO.png' %}" alt="E-Land Records Logo">
             <h2>Land Record Management</h2>
             <h3>User Registration Page</h3>
         </div>
 
-        <form id="registrationForm" onsubmit="return validateForm(event)">
+        <form id="registrationForm" method="POST">
+            {% csrf_token %}
             <div class="form-grid">
                 <div class="form-group">
                     <label for="username" class="required">User Name</label>
@@ -61,7 +64,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for "dob" class="required">Date of Birth</label>
+                    <label for="dob" class="required">Date of Birth</label>
                     <input type="date" id="dob" name="dob" required>
                 </div>
 
@@ -85,13 +88,13 @@
                     <div>
                         <label for="street">Street</label>
                         <input type="text" id="street" name="street" required>
-                        
+
                         <label for="city">City</label>
                         <input type="text" id="city" name="city" required>
-                        
+
                         <label for="state">State</label>
                         <input type="text" id="state" name="state" required>
-                        
+
                         <label for="zipCode">Zip Code</label>
                         <input type="text" id="zipCode" name="zipCode" required>
                     </div>
@@ -139,9 +142,8 @@
                 passwordMatchError.style.display = 'none';
             }
 
-            // Basic validation for required fields
             const requiredFields = ['username', 'firstName', 'lastName', 'gender', 'dob', 
-                                 'phoneNumber', 'aadharNumber', 'street', 'city', 'state', 'zipCode'];
+                                    'phoneNumber', 'aadharNumber', 'street', 'city', 'state', 'zipCode'];
             
             for (let field of requiredFields) {
                 const input = document.getElementById(field);
@@ -151,14 +153,12 @@
                 }
             }
 
-            // Validate phone number (simple check for 10 digits)
             const phoneNumber = document.getElementById('phoneNumber').value;
             if (!/^\d{10}$/.test(phoneNumber)) {
                 alert('Please enter a valid 10-digit phone number');
                 return false;
             }
 
-            // Validate Aadhaar number (12 digits)
             const aadharNumber = document.getElementById('aadharNumber').value;
             if (!/^\d{12}$/.test(aadharNumber)) {
                 alert('Please enter a valid 12-digit Aadhaar number');
@@ -168,6 +168,44 @@
             alert('Registration successful!');
             return true;
         }
+    </script>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value,
+                confirmPassword: document.getElementById("confirmPassword").value,
+                firstName: document.getElementById("firstName").value,
+                middleName: document.getElementById("middleName").value,
+                lastName: document.getElementById("lastName").value,
+                gender: document.getElementById("gender").value,
+                dob: document.getElementById("dob").value,
+                email: document.getElementById("email").value,
+                phoneNumber: document.getElementById("phoneNumber").value,
+                aadharNumber: document.getElementById("aadharNumber").value,
+                street: document.getElementById("street").value,
+                city: document.getElementById("city").value,
+                state: document.getElementById("state").value,
+                zipCode: document.getElementById("zipCode").value,
+            };
+
+            try {
+                const response = await fetch("/register-user/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                alert(result.message);
+                if (result.status === "success") window.location.href = "/home/";
+            } catch (error) {
+                alert("Error submitting form. Try again!");
+            }
+        });
     </script>
 </body>
 </html>

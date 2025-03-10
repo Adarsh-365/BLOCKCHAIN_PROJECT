@@ -103,9 +103,11 @@
                     <td>{{ record.registration_date }}</td>
                     <td class="survey-status-{{ record.status|lower }}">{{ record.status }}</td>
                     <td class="survey-actions">
-                        <a href="#">👁️</a>
-                        <a href="#">✏️</a>
-                        <a href="#">⬇️</a>
+                       
+                            <button>View</button>
+                            <button>Approve</button>
+                            <button>Request Docs</button>
+                       
                     </td>
                 </tr>
                 {% endfor %}

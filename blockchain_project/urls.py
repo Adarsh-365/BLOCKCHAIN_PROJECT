@@ -20,13 +20,21 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home),
+    path('home/',views.home,name="home"),
+    path("user-login/", views.user_login, name="user-login"),
+    path("official-login/", views.official_login, name="official-login"),
+    path('register/',views.register,name="register"),
     path('user_reg',views.user_registration,name='user_reg'),
+    path("register-user/", views.register_user, name="register_user"),
     path('forget_pass',views.forget_pass,name='forget_pass'),
     path('official_reg',views.officail_registration,name='official_reg'),
     path('main',views.main,name='main'),
     path('tab',views.tab,name='tab'),
     path('dashboard',views.dashboard,name='dashboard'),
     path('user_dashboard',views.user_dashboard,name='user_dashboard'),
+    path('submit-land-request/',views.submit_land_request,name='submit-land-request'),
+    path('clerkdashboard',views.clerkdashboard,name = "clerkdashboard"),
+    
     
     path('load_tab/<int:tab>/', views.load_tab, name='load_tab'),
 ]
